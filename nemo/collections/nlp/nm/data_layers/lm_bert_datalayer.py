@@ -161,6 +161,7 @@ class BertPretrainingPreprocessedDataLayer(DataLayerNM):
 
     def __init__(self, dataset, max_pred_length, batch_size=64, training=True):
 
+        super().__init__()
         if os.path.isdir(dataset):
             self.files = [
                 os.path.join(dataset, f) for f in os.listdir(dataset) if os.path.isfile(os.path.join(dataset, f))
@@ -178,7 +179,6 @@ class BertPretrainingPreprocessedDataLayer(DataLayerNM):
             total_length += len(fp['input_ids'])
             fp.close()
         self.total_length = total_length
-        super().__init__()
 
     def _collate_fn(self, x):
         num_components = len(x[0])
